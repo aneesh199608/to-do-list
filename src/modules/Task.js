@@ -7,6 +7,30 @@ export default class Task {
         this.completed = false;
     }
 
+    setTitle(title) {
+        this.title = title;
+    }
+
+    getTitle() {
+        return this.title;
+    }
+
+    setDate(dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    getDate() {
+        return this.dueDate;
+    }
+
+    setPriority(priority) {
+        this.priority = priority;
+    }
+
+    getPriority() {
+        return this.priority;
+    }
+
     toggleComplete() {
         this.completed = !this.completed;
     }

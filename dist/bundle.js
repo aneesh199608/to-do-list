@@ -1,1 +1,0 @@
-(()=>{"use strict";class e{static init(){console.log("UI Initialized"),e.renderProjects()}static renderProjects(){document.getElementById("project-container").innerHTML="<h2>Projects will be listed here...</h2>"}}document.addEventListener("DOMContentLoaded",e.init)})();

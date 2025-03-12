@@ -14,4 +14,15 @@ export default class ToDoList {
     removeProject(index) {
         this.projects.splice(index,1);
     }
+
+    getProject(projectName) {
+        return this.projects.find(project => project.name === projectName);
+    }
+    
+    updateProject(oldName, newName) {
+        const project = this.getProject(oldName);
+        if (project) {
+          project.name = newName;
+        }
+    }
 }
