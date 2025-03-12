@@ -3,12 +3,16 @@ import Project from './Project.js';
 export default class ToDoList {
     constructor() {
         this.project = [];
+        this.currentProject = null;
     }
 
     addProject(project) {
         if (project instanceof Project) {
             this.projects.push(project);
         }
+        if (!this.currentProject) {
+            this.currentProject = project;
+          }
     }
 
     removeProject(index) {
@@ -25,4 +29,7 @@ export default class ToDoList {
           project.name = newName;
         }
     }
+    getCurrentProject() {
+        return this.currentProject; 
+      }
 }
