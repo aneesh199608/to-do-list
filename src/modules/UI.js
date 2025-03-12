@@ -1,6 +1,8 @@
 import Task from './Task.js';
 import Project from './Project.js';
 import ToDoList from './ToDoList.js';
+import ProjectUI from './ProjectUI.js';
+import TaskUI from './TaskUI.js';
 
 export default class UI {
   static toDoList = new ToDoList();
@@ -12,9 +14,10 @@ export default class UI {
       UI.toDoList.projects = [];
     }
 
+    // ✅ Load default project and tasks
     UI.loadSampleData();
-    UI.renderProjects();
-    UI.renderTasks();
+    ProjectUI.renderProjects();
+    TaskUI.renderTasks();
     UI.setupEventListeners();
   }
 
@@ -31,8 +34,8 @@ export default class UI {
   }
 
   static setupEventListeners() {
-    document.getElementById('add-project-btn').addEventListener('click', () => UI.addProject());
-    document.getElementById('add-task-btn').addEventListener('click', () => UI.addTask());
+    document.getElementById('add-project-btn').addEventListener('click', UI.addProject);
+    document.getElementById('add-task-btn').addEventListener('click', UI.addTask);
   }
 
   static addProject() {
@@ -40,7 +43,7 @@ export default class UI {
     if (projectName) {
       const project = new Project(projectName);
       UI.toDoList.addProject(project);
-      UI.renderProjects();
+      ProjectUI.renderProjects();
     }
   }
 
@@ -59,57 +62,19 @@ export default class UI {
     if (taskTitle) {
       const newTask = new Task(taskTitle, taskDescription, taskDueDate, taskPriority);
       currentProject.addTask(newTask);
-      UI.renderTasks();
+      TaskUI.renderTasks();
     }
-  }
-
-  static renderProjects() {
-    if (!UI.toDoList.projects) return;
-
-    const projectContainer = document.getElementById('project-container');
-    projectContainer.innerHTML = "";
-
-    UI.toDoList.projects.forEach(project => {
-      const projectElement = document.createElement('div');
-      projectElement.classList.add('project');
-      projectElement.innerHTML = `
-        <h3 onclick="UI.selectProject('${project.name}')">${project.name}</h3>
-        <button onclick="UI.removeProject('${project.name}')">Delete</button>
-      `;
-      projectContainer.appendChild(projectElement);
-    });
   }
 
   static selectProject(projectName) {
     UI.toDoList.setCurrentProject(projectName);
-    UI.renderTasks();
-  }
-
-  static renderTasks() {
-    const taskListContainer = document.getElementById('task-list');
-    taskListContainer.innerHTML = "";
-
-    const currentProject = UI.toDoList.getCurrentProject();
-    if (!currentProject || currentProject.tasks.length === 0) {
-      taskListContainer.innerHTML = "<p>No tasks available. Add some tasks!</p>";
-      return;
-    }
-
-    currentProject.tasks.forEach(task => {
-      const taskElement = document.createElement('div');
-      taskElement.classList.add('task');
-      taskElement.innerHTML = `
-        <p><strong>${task.title}</strong> - ${task.description} (Due: ${task.dueDate}, Priority: ${task.priority})</p>
-        <button onclick="UI.removeTask('${task.title}')">Delete</button>
-      `;
-      taskListContainer.appendChild(taskElement);
-    });
+    TaskUI.renderTasks();
   }
 
   static removeProject(projectName) {
     UI.toDoList.removeProject(projectName);
-    UI.renderProjects();
-    UI.renderTasks();
+    ProjectUI.renderProjects();
+    TaskUI.renderTasks();
   }
 
   static removeTask(taskTitle) {
@@ -117,6 +82,6 @@ export default class UI {
     if (!currentProject) return;
 
     currentProject.removeTask(taskTitle);
-    UI.renderTasks();
+    TaskUI.renderTasks();
   }
 }
