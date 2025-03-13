@@ -24,7 +24,9 @@ export default class UI {
     FormHandler.onProjectSubmit = (projectName) => {
       const project = new Project(projectName);
       UI.toDoList.addProject(project);
+      UI.toDoList.setCurrentProject(project);
       ProjectUI.renderProjects();
+      TaskUI.renderTasks();
     };
 
     FormHandler.onTaskSubmit = (taskData) => {
@@ -65,8 +67,11 @@ export default class UI {
   }
 
   static selectProject(projectName) {
-    UI.toDoList.setCurrentProject(projectName);
-    TaskUI.renderTasks();
+    const project = UI.toDoList.getProject(projectName);
+    if (project) {
+      UI.toDoList.setCurrentProject(project);
+      TaskUI.renderTasks();
+    }
   }
 
   static removeProject(projectName) {

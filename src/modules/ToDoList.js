@@ -2,17 +2,18 @@ import Project from './Project.js';
 
 export default class ToDoList {
     constructor() {
-        this.project = [];
+        this.projects = [];
         this.currentProject = null;
     }
 
     addProject(project) {
         if (project instanceof Project) {
             this.projects.push(project);
+            // Set as current project if it's the first one
+            if (!this.currentProject) {
+                this.currentProject = project;
+            }
         }
-        if (!this.currentProject) {
-            this.currentProject = project;
-          }
     }
 
     removeProject(index) {
@@ -29,7 +30,12 @@ export default class ToDoList {
           project.name = newName;
         }
     }
+
+    setCurrentProject(project) {
+        this.currentProject = project;
+    }
+
     getCurrentProject() {
-        return this.currentProject; 
-      }
+        return this.currentProject;
+    }
 }
