@@ -27,17 +27,18 @@ export default class TaskUI {
         <div class="task-content">
           <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''}>
           <div class="task-text ${task.completed ? 'completed' : ''}">
-            <strong>${task.title}</strong> - ${task.description}
+            <strong>${task.title}</strong>
+            <span>${task.description}</span>
             <div class="task-meta">
               <span>Due: ${task.dueDate}</span>
               <span>Priority: ${task.priority}</span>
             </div>
           </div>
-        </div>
-        <div class="delete-task" data-remove-task="${task.title}">
-          <svg viewBox="0 0 24 24">
-            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
-          </svg>
+          <div class="delete-task" data-remove-task="${task.title}">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+            </svg>
+          </div>
         </div>
       `;
       taskListContainer.appendChild(taskElement);

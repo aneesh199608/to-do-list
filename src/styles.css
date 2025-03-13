@@ -244,10 +244,11 @@ dialog.modal h2 {
 
 /* Task List Items */
 .task-content {
-  flex: 1;
   display: flex;
   align-items: center;
   gap: 15px;
+  flex: 1;
+  min-width: 0;
 }
 
 .task-checkbox {
@@ -258,6 +259,12 @@ dialog.modal h2 {
 
 .task-text {
   flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .task-text.completed {
@@ -286,19 +293,26 @@ dialog.modal h2 {
 .task-meta {
   display: flex;
   gap: 15px;
-  margin-top: 5px;
   font-size: 0.9em;
   color: #666;
+  margin-left: 10px;
 }
 
 .task-meta span {
   display: flex;
   align-items: center;
-  gap: 5px;
 }
 
 .task-meta span::before {
   content: "•";
-  color: #999;
   margin-right: 5px;
+  color: #999;
+}
+
+/* Add spacing between Add Task button and list */
+#task-list {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
