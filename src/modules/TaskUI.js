@@ -29,6 +29,7 @@ export default class TaskUI {
       return;
     }
 
+    currentProject.tasks = this.sortTasks(currentProject.tasks);
     taskListContainer.innerHTML = "";
     currentProject.tasks.forEach(task => {
       const taskElement = document.createElement('div');
@@ -40,7 +41,9 @@ export default class TaskUI {
             <strong>${task.title}</strong>
             <span>${task.description}</span>
             <div class="task-meta">
-              <span>Due: ${task.dueDate}</span>
+              <span class="${task.isOverdue ? 'overdue' : ''}">
+                ${task.relativeDate} ${task.isOverdue ? '(Overdue)' : ''}
+              </span>
               <span>Priority: ${task.priority}</span>
             </div>
           </div>
@@ -74,5 +77,9 @@ export default class TaskUI {
         taskElement.querySelector('.task-text').classList.toggle('completed');
       });
     });
+  }
+
+  static sortTasks(tasks) {
+    return tasks.sort((a, b) => a.dueDate - b.dueDate);
   }
 }

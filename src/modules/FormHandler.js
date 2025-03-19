@@ -1,3 +1,5 @@
+import { isBefore, parseISO } from 'date-fns';
+
 export default class FormHandler {
     static initializeFormHandlers() {
         this.setupProjectForm();
@@ -47,10 +49,17 @@ export default class FormHandler {
         addTaskBtn.onclick = () => modal.showModal();
 
         form.onsubmit = () => {
+            const dueDate = parseISO(document.getElementById('task-due-date').value);
+            
+            if (isBefore(dueDate, new Date())) {
+                alert('Due date must be in the future');
+                return false;
+            }
+
             const taskData = {
                 title: document.getElementById('task-title').value,
                 description: document.getElementById('task-description').value,
-                dueDate: document.getElementById('task-due-date').value,
+                dueDate: dueDate.toISOString(),
                 priority: document.getElementById('task-priority').value
             };
             

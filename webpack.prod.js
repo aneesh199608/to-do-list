@@ -5,5 +5,7 @@ export default merge(common, {
   mode: 'production',
   optimization: {
     minimize: true,
+    usedExports: true,
+    concatenateModules: true
   },
 });

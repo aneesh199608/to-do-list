@@ -345,3 +345,8 @@ dialog.modal h2 {
 .empty-state p {
     margin: 0;
 }
+
+.overdue {
+    color: #dc3545;
+    font-weight: bold;
+}
