@@ -3,13 +3,23 @@ import UI from "./UI.js";
 export default class TaskUI {
   static renderTasks() {
     const taskListContainer = document.getElementById('task-list');
-    const projectTitle = document.getElementById('project-title'); 
+    const projectTitle = document.getElementById('project-title');
+    const addTaskBtn = document.getElementById('add-task-btn');
 
     const currentProject = UI.toDoList.getCurrentProject();
 
+    // Show/hide Add Task button
+    if (addTaskBtn) {
+      addTaskBtn.style.display = currentProject ? 'block' : 'none';
+    }
+
     if (!currentProject) {
       projectTitle.textContent = "No Project Selected"; 
-      taskListContainer.innerHTML = "<p>Please select or create a project.</p>";
+      taskListContainer.innerHTML = `
+        <div class="empty-state">
+          <p>Select or create a project to get started</p>
+        </div>
+      `;
       return;
     }
 

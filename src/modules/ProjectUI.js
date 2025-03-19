@@ -2,9 +2,15 @@ import UI from "./UI.js";
 
 export default class ProjectUI {
   static renderProjects() {
-    
     const projectContainer = document.getElementById('project-container');
     projectContainer.innerHTML = "";
+
+    if (UI.toDoList.projects.length === 0) {
+      projectContainer.innerHTML = `
+        <p class="empty-state">No projects found. Add your first project!</p>
+      `;
+      return;
+    }
 
     UI.toDoList.projects.forEach(project => {
       const projectElement = document.createElement('div');

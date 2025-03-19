@@ -331,3 +331,17 @@ dialog.modal h2 {
   flex-direction: column;
   gap: 12px;
 }
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+    font-size: 1.1em;
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.empty-state p {
+    margin: 0;
+}

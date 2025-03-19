@@ -16,8 +16,15 @@ export default class ToDoList {
         }
     }
 
-    removeProject(index) {
-        this.projects.splice(index,1);
+    removeProject(projectName) {
+        const index = this.projects.findIndex(p => p.name === projectName);
+        if (index > -1) {
+            this.projects.splice(index, 1);
+            // Clear current project if it's the one being deleted
+            if (this.currentProject?.name === projectName) {
+                this.currentProject = null;
+            }
+        }
     }
 
     getProject(projectName) {
