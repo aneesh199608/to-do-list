@@ -11,11 +11,6 @@ export default class UI {
   static init() {
     console.log("UI Initialized");
 
-    if (!UI.toDoList.projects) {
-      UI.toDoList.projects = [];
-    }
-
-    UI.loadSampleData();
     ProjectUI.renderProjects();
     TaskUI.renderTasks();
     UI.setupEventListeners();
@@ -27,6 +22,7 @@ export default class UI {
       UI.toDoList.setCurrentProject(project);
       ProjectUI.renderProjects();
       TaskUI.renderTasks();
+      UI.toDoList.saveToLocalStorage();
     };
 
     FormHandler.onTaskSubmit = (taskData) => {
@@ -44,21 +40,10 @@ export default class UI {
       );
       currentProject.addTask(newTask);
       TaskUI.renderTasks();
+      UI.toDoList.saveToLocalStorage();
     };
 
     FormHandler.initializeFormHandlers();
-  }
-
-  static loadSampleData() {
-    const sampleProject = new Project("My First Project");
-
-    sampleProject.addTask(new Task("Buy groceries", "Milk, Eggs, Bread", "2025-03-15", "High"));
-    sampleProject.addTask(new Task("Workout", "Morning cardio session", "2025-03-16", "Medium"));
-    sampleProject.addTask(new Task("Read a book", "Finish 50 pages of a novel", "2025-03-17", "Low"));
-    sampleProject.addTask(new Task("Write a blog", "Draft an article about JavaScript", "2025-03-18", "High"));
-    sampleProject.addTask(new Task("Clean room", "Organize desk and wardrobe", "2025-03-19", "Medium"));
-
-    UI.toDoList.addProject(sampleProject);
   }
 
   static setupEventListeners() {

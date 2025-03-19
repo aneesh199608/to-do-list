@@ -10,8 +10,14 @@
         <div class="sidebar">
             <h2>Projects</h2>
             <div id="project-container"></div>
+            <button id="add-project-btn">Add Project</button>
         </div>
-        <button id="add-project-btn">Add Project</button>
+
+        <main class="task-container">
+            <h2 id="project-title">Inbox</h2>
+            <button id="add-task-btn">Add Task</button>
+            <div id="task-list"></div>
+        </main>
     </div>
 
     <dialog id="project-form-modal" class="modal">
@@ -58,14 +64,6 @@
         </form>
     </dialog>
 
-    <main class="task-container">
-        <h2 id="project-title">Inbox</h2>
-        <button id="add-task-btn">Add Task</button>
-        <div id="task-list">
-
-        </div>
-    </main>
-
-  <script src="bundle.js" type="module"></script>
+    <script src="bundle.js" type="module"></script>
 </body>
 </html>

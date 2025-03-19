@@ -24,19 +24,28 @@ body {
 /* Main Layout */
 .container {
   display: flex;
-  flex-direction: column;
-  width: 250px;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 300px;
+  background: white;
   border-right: 1px solid var(--border-color);
   padding: 20px;
   height: 100vh;
-  background: white;
+  position: fixed;
+  left: 0;
+  top: 0;
 }
 
 .task-container {
   flex: 1;
+  margin-left: 300px;
   padding: 30px 40px;
-  max-width: calc(100vw - var(--sidebar-width));
-  background: #f8f9fa;
+  min-height: 100vh;
+  background: var(--background-color);
+  width: calc(100vw - 300px);
+  overflow-x: hidden;
 }
 
 /* Project Sidebar */
@@ -113,6 +122,7 @@ body {
   cursor: pointer;
   font-size: 14px;
   transition: background 0.2s;
+  margin-bottom: 25px;
 }
 
 #add-task-btn:hover {
@@ -129,6 +139,8 @@ body {
   display: flex;
   align-items: center;
   gap: 15px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .task.high-priority { border-left-color: #dc3545; }
@@ -226,16 +238,26 @@ dialog.modal h2 {
     width: 100%;
     position: static;
     height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
   }
   
   .task-container {
+    width: 100%;
     margin-left: 0;
-    max-width: 100%;
-    padding: 20px;
+    padding: 20px 15px;
   }
   
   .container {
     flex-direction: column;
+  }
+  
+  #task-list {
+    max-width: 100%;
+  }
+  
+  #add-task-btn {
+    margin-bottom: 20px;
   }
 }
 
@@ -287,6 +309,10 @@ dialog.modal h2 {
   opacity: 0.7;
 }
 
+.task-text.completed .task-meta {
+  opacity: 0.5;
+}
+
 .delete-task {
   width: 20px;
   height: 20px;
@@ -326,10 +352,12 @@ dialog.modal h2 {
 
 /* Add spacing between Add Task button and list */
 #task-list {
-  margin-top: 25px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 15px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
 }
 
 .empty-state {
